@@ -16,8 +16,11 @@ class Organization < ActiveRecord::Base
 
   after_save :validate_minimum_number_of_users
 
-  # Public
+  # Public: Retrieve both Assignments and Group Assignments
+  # for the organization.
   #
+  # Returns an array of assignments or NullAssignment
+  # if the organization doesn't have any yet
   def all_assignments
     assignments + group_assignments
   end
