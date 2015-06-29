@@ -32,7 +32,7 @@ class Assignment < ActiveRecord::Base
   #
   # Example
   #
-  #  assignment.private?
+  #  assignment.public?
   #  # => true
   #
   # Returns a boolean
