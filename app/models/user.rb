@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   enum state: [:active, :pending]
 
+  has_many :assignments, foreign_key: :creator_id
+  has_many :group_assignments, foreign_key: :creator_id
   has_many :repo_accesses, dependent: :destroy
 
   has_and_belongs_to_many :organizations
