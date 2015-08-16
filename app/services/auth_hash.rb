@@ -8,10 +8,7 @@ class AuthHash
   end
 
   def user_info
-    {
-      uid:      uid,
-      token:    token
-    }
+    { uid: uid, token: token }
   end
 
   private
