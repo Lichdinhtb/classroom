@@ -8,6 +8,8 @@ class NullAssignmentInvitation < AssignmentInvitation
 
   protected
 
+  # Internal: Set the key to be nil
+  # Returns nil
   def assign_key
     nil
   end

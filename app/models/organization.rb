@@ -25,8 +25,14 @@ class Organization < ActiveRecord::Base
     assignments + group_assignments
   end
 
-  # Public
+  # Public: Return an active users GitHub Client for API user
   #
+  # Example
+  #
+  #   organization.github_client
+  #   # => #<Octokit::Client:0x3fe32a050c4c>
+  #
+  # Returns an authenticated Octokit::Client
   def github_client
     users.where(state: 'active').sample.github_client
   end

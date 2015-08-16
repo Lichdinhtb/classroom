@@ -21,24 +21,56 @@ class GroupAssignment < ActiveRecord::Base
 
   validate :uniqueness_of_title_across_organization
 
+  # Public: Get the GroupAssignmentInvitation
+  #
+  # Returns the AssignmentInvitation or a NullGroupAssignmentInvitation if
+  # the invitation does not exist
   def group_assignment_invitation
     super || NullGroupAssignmentInvitation.new
   end
 
+  # Public: Determine if the GroupAssignment is private
+  #
+  # Example
+  #
+  #  group_assignment.public?
+  #  # => true
+  #
+  # Returns a boolean
   def private?
     !public_repo
   end
 
+  # Public: Determine if the GroupAssignment is public
+  #
+  # Example
+  #
+  #  group_assignment.private?
+  #  # => true
+  #
+  # Returns a boolean
   def public?
     public_repo
   end
 
+  # Public: Determine if the GroupAssignment has starter code
+  #
+  # Example
+  #
+  #  group_assignment.starter_code?
+  #  # => true
+  #
+  # Returns if the starter_code_repo_id column is not NULL
   def starter_code?
     starter_code_repo_id.present?
   end
 
   private
 
+  # Internal: Verify that there aren't any Assignments in the
+  # Assignments Organization that have the same title.
+  #
+  # This will add an error to the title column if there is a match
   def uniqueness_of_title_across_organization
     return unless Assignment.where(title: title, organization: organization).present?
     errors.add(:title, 'has already been taken')
